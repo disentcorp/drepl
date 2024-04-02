@@ -27,7 +27,8 @@ import { Repl } from 'drepl';
 ```
 
 ![Hello World](https://github.com/disentcorp/drepl/blob/main/src/lib/components/assets/helloworld.png "Hello World")
-^ this a picture, github doesn't allow embedded widgets sadly (call us we can help with that!)
+
+^ this a picture, github doesn't allow embedded widgets 😔 (@github 📧 us we can help with that!)
 
 ## Props
 
