@@ -32,8 +32,7 @@ import { Repl } from 'drepl';
 <Repl defaultInput={'print("Hello World!")'} />
 ```
 
-<div class="disent-embed" data-defaultinput='print("Hello World")'></div>
-<script type='text/javascript' src="http://repl.disent.com/drepl.js" async></script>
+![Hello World](https://github.com/disentcorp/drepl/blob/main/src/lib/components/assets/helloworld.png "Hello World")
 
 ## Props
 
@@ -50,3 +49,13 @@ import { Repl } from 'drepl';
 `height`|`"225px"`|height (only if `multiLine=true`)|
 `inputRatio`|`40`|% input to output|
 `runOnLoad`|`true`|run on initial page load|
+
+
+## Pure JS/HTML way
+
+For the props above just add as data-* tags on the <div> below
+
+```js
+<div class="disent-embed" data-defaultinput='print("Hello World")'></div>
+<script type='text/javascript' src="http://repl.disent.com/drepl.js" async></script>
+```
