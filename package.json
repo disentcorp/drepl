@@ -1,6 +1,6 @@
 {
   "name": "drepl",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Disent REPL",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/disentchris/repl.git"
+    "url": "git+https://github.com/disentcorp/drepl.git"
   },
   "keywords": [
     "repl",
@@ -65,7 +65,7 @@
   "author": "Disent",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/disentchris/repl/issues"
+    "url": "https://github.com/disentcorp/drepl/issues"
   },
-  "homepage": "https://github.com/disentchris/repl#readme"
+  "homepage": "https://github.com/disentcorp/drepl#readme"
 }
