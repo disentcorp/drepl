@@ -13,26 +13,21 @@ Current version supports `python` for RCE on repl.disent.com. `bash` has a theme
 - repl@disent.com
 - https://discord.gg/PFQxJMm4Kb
 
-## Download
+## Install
 
 ```bash
-npm i drepl
-```
-
-or 
-
-```bash
-yarn add drepl
+bash$ yarn add drepl 
 ```
 
 ## Use
 
 ```jsx
 import { Repl } from 'drepl';
-<Repl defaultInput={'print("Hello World!")'} />
+<Repl defaultInput={"print(\"Hello World!\")"} />
 ```
 
 ![Hello World](https://github.com/disentcorp/drepl/blob/main/src/lib/components/assets/helloworld.png "Hello World")
+^ this a picture, github doesn't allow embedded widgets sadly (call us we can help with that!)
 
 ## Props
 
