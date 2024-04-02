@@ -1,0 +1,71 @@
+{
+  "name": "drepl",
+  "version": "0.1.6",
+  "description": "Disent REPL",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build-patch": "yarn version --patch && webpack --config webpack.config.js",
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "docs": "your-docs-generation-script",
+    "prepublish": "rm -rf ./dist && npm run build"
+  },
+  "dependencies": {
+    "react-tippy": "^1.4.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "css-loader": "^6.10.0",
+    "react-scripts": "^5.0.0",
+    "react-tippy": "^1.4.0",
+    "style-loader": "^3.3.4",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^4.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/disentchris/repl.git"
+  },
+  "keywords": [
+    "repl",
+    "python",
+    "interactive"
+  ],
+  "author": "Disent",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/disentchris/repl/issues"
+  },
+  "homepage": "https://github.com/disentchris/repl#readme"
+}

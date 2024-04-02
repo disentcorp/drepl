@@ -1,0 +1,152 @@
+.repl{
+    white-space: nowrap;
+    display:flex;
+    flex-wrap:wrap;
+    font-size:12pt;
+    font-family: Consolas;
+    line-height:12pt;
+    vertical-align: middle;
+    min-height:35px;
+    text-align:left;
+    box-sizing:border-box
+}
+.prompt{
+    flex: 0 1 auto;
+    cursor:pointer;
+    border:0px;
+    background-color: black;
+    padding-left:5px;
+}
+
+.command{
+    flex: 0 1 auto;
+    padding-left: 6px;
+    padding-right:10px;
+    background-color: black;
+    scrollbar-color: white;    
+}
+
+.console{
+flex: 1 1 auto;
+border-left:0px;
+padding-left:5px;
+padding-right:5px;
+overflow-x: scroll;
+overflow-y: scroll;
+white-space:nowrap; word-wrap:break-word !important;
+}
+
+.repl-input{
+    color:white;
+    border: 1px solid black;
+    padding-top:8px;
+    min-height:35px;
+    box-sizing: inherit;
+
+}
+
+.repl-output{
+border: 1px solid black;
+padding-top:8px;
+min-height: 35px;
+box-sizing: inherit;
+}
+
+
+.command::selection{
+    background-color: white;
+    color:black;
+}
+.command::placeholder{
+ color:white;
+opacity: 1;   
+}
+.command:focus{
+    outline:0px;
+}
+
+
+.console::selection{
+    background-color: black;
+    color:white;
+}
+.console:focus{
+    outline: none;
+}
+
+
+
+.repl-input::-webkit-scrollbar,
+.repl-output::-webkit-scrollbar
+{
+    width: 3px;
+    height: 3px;
+}
+
+.command::-webkit-scrollbar{
+    color:white !important;
+}
+
+::-webkit-scrollbar{
+    width:7px;
+    color:black;
+}
+
+
+.repl::-webkit-scrollbar-thumb{
+    background: black;
+}
+
+
+.repl::-webkit-scrollbar-track {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.repl::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+.tooltiplink{
+    border-top: 2px solid rgba(255,255,255,0.6);
+    padding-top:5px;
+    padding-bottom:10px;
+    font-size: 16pt;
+    color:rgba(255,255,255,0.6);
+    text-decoration: none;
+}
+
+.tooltiplink:hover{
+    text-decoration: underline;
+}
+
+.tippy-tooltip{
+    background-color: black !important;
+    border-radius: 0px;
+    opacity: 1 !important;
+    height:100%;
+    
+}
+
+.copy-button{
+    margin-top:'5px';
+    font-family: Consolas, Menlo;
+    font-variant:'small-caps';
+    background-color:"rgba(125,125,125,1)";
+    border:'none';
+}
+
+.copy-button:active{
+    background-color: gray;
+}
