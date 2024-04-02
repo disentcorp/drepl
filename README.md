@@ -4,7 +4,7 @@
 
 Widget to put mini python cells in your docs, webpages, whatnot.
 
-Current version supports `python` for RCE on repl.disent.com. `bash` has a theme but no RCE. Maybe we add more? Let us know.
+Current version supports `python` for RCE (remote code execution) on [`repl.disent.com`](https://repl.disent.com) using our sandbox. `bash` has a theme but no RCE. Maybe we add more? Let us know.
 
 <br/> 
 
@@ -28,7 +28,7 @@ import { Repl } from 'drepl';
 
 ![Hello World](https://github.com/disentcorp/drepl/blob/main/src/lib/components/assets/helloworld.png "Hello World")
 
-^ this a picture, github doesn't allow embedded widgets 😔 (@github 📧 us we can help with that!)
+^ this a picture, github doesn't allow embedded widgets 😔 (@github [📧 us](mailto://repl@disent.com) we can help with that!)
 
 ## Props
 

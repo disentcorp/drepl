@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 
 const Console = (props) => {
-  const { outputHistory, 
-    setOutputHistory, 
-    inlineStyles,
-    exposeCurrentOutput } = props;
+  const { outputHistory, setOutputHistory, inlineStyles, exposeCurrentOutput } =
+    props;
   //------------STATES---------------------
   const [currentOutput, setCurrentOutput] = useState(outputHistory.slice(-1));
   //----------------REFS---------------------
@@ -23,7 +21,7 @@ const Console = (props) => {
         }
       }
     },
-    [outputHistory]
+    [outputHistory],
   );
   //-----------------USEEFFECTS-----------------------
   useEffect(() => {
@@ -33,34 +31,31 @@ const Console = (props) => {
 
   useEffect(() => {
     var preChild = innerHTMLRef.current.querySelector("pre");
-    var preChildText = preChild?.innerText
-    if (exposeCurrentOutput !== null&&preChildText) {
+    var preChildText = preChild?.innerText;
+    if (exposeCurrentOutput !== null && preChildText) {
       exposeCurrentOutput(preChildText);
     }
   }, [currentOutput]);
 
   // return (
   //   <div className="repl-input-div">
-  //     <div ref={innerHTMLRef} contentEditable={exposeCurrentOutput !== null} 
-  //     className="repl-input repl-apioutput" 
-  //     dangerouslySetInnerHTML={{ __html: currentOutput }} 
+  //     <div ref={innerHTMLRef} contentEditable={exposeCurrentOutput !== null}
+  //     className="repl-input repl-apioutput"
+  //     dangerouslySetInnerHTML={{ __html: currentOutput }}
   //     onKeyUp={onOutputKeyUp}></div>
   //   </div>
   // );
 
-
   return (
-      <div ref={innerHTMLRef} 
+    <div
+      ref={innerHTMLRef}
       className="console repl-output"
-      style={{...inlineStyles}} 
-      contentEditable={exposeCurrentOutput !== null} 
-      dangerouslySetInnerHTML={{ __html: currentOutput }} 
-      onKeyUp={onOutputKeyUp}>
-
-      </div>
+      style={{ ...inlineStyles }}
+      contentEditable={exposeCurrentOutput !== null}
+      dangerouslySetInnerHTML={{ __html: currentOutput }}
+      onKeyUp={onOutputKeyUp}
+    ></div>
   );
-
-
 };
 
 export default Console;

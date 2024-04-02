@@ -51,7 +51,7 @@ const Repl = (props) => {
   const [outputHistory, setOutputHistory] = useState([defaultOutput]);
 
   //-------------REFS--------------------------
-  const replRef = useRef()
+  const replRef = useRef();
   const promptRef = useRef();
   const currentCallId = useRef(0);
   //------------HELPER FUNCTIONS------------------------
@@ -65,7 +65,10 @@ const Repl = (props) => {
           const BASE = replURI;
           let url = `${BASE}/api/?code=${encodedCommand}&colorize=true&imports=${encodedImports}`;
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), REPL_CALL_TIMEOUT);
+          const timeoutId = setTimeout(
+            () => controller.abort(),
+            REPL_CALL_TIMEOUT,
+          );
           try {
             const response = await fetch(url, {
               method: "GET",
@@ -82,12 +85,17 @@ const Repl = (props) => {
           } catch (error) {
             if (currentCallId.current === callId) {
               if (currentCommand !== defaultInput) {
-                  if (error.name === "AbortError") {
-                    setOutputHistory((p) => [...p, `Server Timeout. Try again later.`]);
-                  } else {
-                    setOutputHistory((p) => [...p, `Too much traffic. Try again later.`]);
-                  }
-            
+                if (error.name === "AbortError") {
+                  setOutputHistory((p) => [
+                    ...p,
+                    `Server Timeout. Try again later.`,
+                  ]);
+                } else {
+                  setOutputHistory((p) => [
+                    ...p,
+                    `Too much traffic. Try again later.`,
+                  ]);
+                }
               } else {
                 setOutputHistory((p) => [...p, `${defaultOutput}`]);
               }
@@ -101,7 +109,7 @@ const Repl = (props) => {
         }
       }
     },
-    [setOutputHistory, imports, disabled, defaultInput, defaultOutput]
+    [setOutputHistory, imports, disabled, defaultInput, defaultOutput],
   );
 
   //------------------styling
@@ -128,7 +136,7 @@ const Repl = (props) => {
   }, []);
 
   const getWidthAsNumber = (rawWidth) => {
-    const width = getWidgetWidth(rawWidth)
+    const width = getWidgetWidth(rawWidth);
     if (typeof width === Number) {
       const minimumSize = Math.max(MINIMUM_WIDTH, width);
       return minimumSize;
@@ -153,29 +161,36 @@ const Repl = (props) => {
         return Math.max(MINIMUM_HEIGHT, numSize);
       } else if (typeof height === "string" && height?.endsWith("px")) {
         const numSize = +height.slice(0, height.length - 2);
-        return isNaN(numSize) ? DEFAULT_HEIGHT : Math.max(MINIMUM_HEIGHT, numSize);
+        return isNaN(numSize)
+          ? DEFAULT_HEIGHT
+          : Math.max(MINIMUM_HEIGHT, numSize);
       } else {
         return DEFAULT_HEIGHT; //default if improperly formatted
       }
     },
-    [DEFAULT_HEIGHT, MINIMUM_HEIGHT]
+    [DEFAULT_HEIGHT, MINIMUM_HEIGHT],
   );
 
   const getHeightInputRatio = useCallback(
     (ratio) => {
       const numRatio = +ratio;
-      let adjustedRatio = numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
+      let adjustedRatio =
+        numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
       let minInputRatio = SINGLE_LINE_HEIGHT / getHeightAsNumber(height);
       let maxInputRatio = 1 - minInputRatio; //by symmetry
-      return Math.min(Math.max(minInputRatio * 100, adjustedRatio * 100), maxInputRatio * 100);
+      return Math.min(
+        Math.max(minInputRatio * 100, adjustedRatio * 100),
+        maxInputRatio * 100,
+      );
     },
-    [height, MINIMUM_HEIGHT, getHeightAsNumber]
+    [height, MINIMUM_HEIGHT, getHeightAsNumber],
   );
 
   const getWidthInputRatio = useCallback(
     (ratio) => {
       const numRatio = +ratio;
-      let adjustedRatio = numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
+      let adjustedRatio =
+        numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
       if (adjustedRatio > 0.95) {
         return 95;
       }
@@ -183,45 +198,91 @@ const Repl = (props) => {
       let minInputRatio = MINIMUM_INPUT_WIDTH / numWidgetSize;
       return Math.max(minInputRatio * 100, adjustedRatio * 100);
     },
-    [width]
+    [width],
   );
 
   const getPromptStyle = useCallback(() => {
     if (multiLine) {
-      var multiStyle =  {width: PROMPT_WIDTHS[language],height: `${getHeightInputRatio(inputRatio)}%` };
+      var multiStyle = {
+        width: PROMPT_WIDTHS[language],
+        height: `${getHeightInputRatio(inputRatio)}%`,
+      };
     } else {
-      var multiStyle =  {width: PROMPT_WIDTHS[language]};
+      var multiStyle = { width: PROMPT_WIDTHS[language] };
     }
-    let colorScheme = language==='bash' ? 'rgba(50,50,50,1)' : 'black'
-    return {...multiStyle, backgroundColor: colorScheme,border:`1px solid ${colorScheme}`}
-
-  }, [inputRatio, multiLine, getHeightInputRatio,language]);
+    let colorScheme = language === "bash" ? "rgba(50,50,50,1)" : "black";
+    return {
+      ...multiStyle,
+      backgroundColor: colorScheme,
+      border: `1px solid ${colorScheme}`,
+    };
+  }, [inputRatio, multiLine, getHeightInputRatio, language]);
 
   const getInputStyle = useCallback(() => {
-    var promptWidth = PROMPT_WIDTHS[language]
+    var promptWidth = PROMPT_WIDTHS[language];
     var w = getWidthAsNumber(width);
     var h = getHeightAsNumber(height);
     if (multiLine) {
       //do not ask me why the .4 is necessary (???) -c
-      var multiStyle =  { width: `${w - promptWidth}px`, height: `${getHeightInputRatio(inputRatio)}%` };
+      var multiStyle = {
+        width: `${w - promptWidth}px`,
+        height: `${getHeightInputRatio(inputRatio)}%`,
+      };
     } else {
-      var multiStyle =  { width: `calc(${getWidthInputRatio(inputRatio)}% - ${promptWidth}px)`, height: MINIMUM_HEIGHT };
+      var multiStyle = {
+        width: `calc(${getWidthInputRatio(inputRatio)}% - ${promptWidth}px)`,
+        height: MINIMUM_HEIGHT,
+      };
     }
-    let colorScheme = language==='bash' ? 'rgba(50,50,50,1)' : 'black'
-    return {...multiStyle, backgroundColor: colorScheme,border:`1px solid ${colorScheme}`}
-  }, [inputRatio, language, getWidthInputRatio, multiLine, width, height, MINIMUM_HEIGHT, getHeightAsNumber, getHeightInputRatio,commandHistory]);
+    let colorScheme = language === "bash" ? "rgba(50,50,50,1)" : "black";
+    return {
+      ...multiStyle,
+      backgroundColor: colorScheme,
+      border: `1px solid ${colorScheme}`,
+    };
+  }, [
+    inputRatio,
+    language,
+    getWidthInputRatio,
+    multiLine,
+    width,
+    height,
+    MINIMUM_HEIGHT,
+    getHeightAsNumber,
+    getHeightInputRatio,
+    commandHistory,
+  ]);
 
   //
   const getOutputStyle = useCallback(() => {
-    var promptWidth = PROMPT_WIDTHS[language]
-    var w = replRef?.current?.offsetWidth ? replRef?.current?.offsetWidth : getWidthAsNumber(width);
+    var promptWidth = PROMPT_WIDTHS[language];
+    var w = replRef?.current?.offsetWidth
+      ? replRef?.current?.offsetWidth
+      : getWidthAsNumber(width);
     var h = getHeightAsNumber(height);
     if (multiLine) {
-      return { width, height: `${100 - getHeightInputRatio(inputRatio)}%`, borderLeft: "1px solid black" };
+      return {
+        width,
+        height: `${100 - getHeightInputRatio(inputRatio)}%`,
+        borderLeft: "1px solid black",
+      };
     } else {
-      return { width: `calc(${100 - getWidthInputRatio(inputRatio)}% - ${promptWidth}px)`, height: MINIMUM_HEIGHT };
+      return {
+        width: `calc(${100 - getWidthInputRatio(inputRatio)}% - ${promptWidth}px)`,
+        height: MINIMUM_HEIGHT,
+      };
     }
-  }, [inputRatio, getWidthInputRatio, multiLine, height, width, MINIMUM_HEIGHT, getHeightAsNumber, getHeightInputRatio,language]);
+  }, [
+    inputRatio,
+    getWidthInputRatio,
+    multiLine,
+    height,
+    width,
+    MINIMUM_HEIGHT,
+    getHeightAsNumber,
+    getHeightInputRatio,
+    language,
+  ]);
 
   //--------------USE EFFECT------------------------
   useEffect(() => {
@@ -245,10 +306,37 @@ const Repl = (props) => {
   }, [outputHistory, exposeCurrentOutput]);
 
   return (
-    <div className="repl" ref={replRef} style={{ width: getWidgetWidth(width), height: multiLine ? height : MINIMUM_HEIGHT }}>
-      <Prompt ref={promptRef} language={language} imports={imports} inlineStyles={getPromptStyle()} />
-      <CommandLine defaultInput={defaultInput} inlineStyles={getInputStyle()} commandHistory={commandHistory} setCommandHistory={setCommandHistory} computeCurrentCommand={computeCurrentCommand} imports={imports} currentCallId={currentCallId} language={language} disabled={disabled} />
-      <Console inlineStyles={getOutputStyle()} outputHistory={outputHistory} setOutputHistory={setOutputHistory} exposeCurrentOutput={exposeCurrentOutput} />
+    <div
+      className="repl"
+      ref={replRef}
+      style={{
+        width: getWidgetWidth(width),
+        height: multiLine ? height : MINIMUM_HEIGHT,
+      }}
+    >
+      <Prompt
+        ref={promptRef}
+        language={language}
+        imports={imports}
+        inlineStyles={getPromptStyle()}
+      />
+      <CommandLine
+        defaultInput={defaultInput}
+        inlineStyles={getInputStyle()}
+        commandHistory={commandHistory}
+        setCommandHistory={setCommandHistory}
+        computeCurrentCommand={computeCurrentCommand}
+        imports={imports}
+        currentCallId={currentCallId}
+        language={language}
+        disabled={disabled}
+      />
+      <Console
+        inlineStyles={getOutputStyle()}
+        outputHistory={outputHistory}
+        setOutputHistory={setOutputHistory}
+        exposeCurrentOutput={exposeCurrentOutput}
+      />
     </div>
   );
 };
