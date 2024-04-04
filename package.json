@@ -1,6 +1,6 @@
 {
   "name": "drepl",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Disent REPL",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -24,16 +24,16 @@
     "react-dom": ">=16.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.0",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
+    "babel-loader": "^8.3.0",
     "css-loader": "^6.10.0",
     "react-scripts": "^5.0.0",
     "react-tippy": "^1.4.0",
     "style-loader": "^3.3.4",
-    "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0"
+    "webpack": "^5.91.0",
+    "webpack-cli": "^4.10.0"
   },
   "eslintConfig": {
     "extends": [
