@@ -309,9 +309,13 @@ const Repl = (props) => {
     <div
       className="repl"
       ref={replRef}
-      style={{
+      style={disabled ? {
         width: getWidgetWidth(width),
         height: multiLine ? height : MINIMUM_HEIGHT,
+        cursor: 'not-allowed' 
+      } : {
+        width: getWidgetWidth(width),
+        height: multiLine ? height : MINIMUM_HEIGHT
       }}
     >
       <Prompt
