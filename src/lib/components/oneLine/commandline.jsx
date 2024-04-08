@@ -70,21 +70,6 @@ const CommandLine = (props) => {
 
   //------------------USE EFFECTS-------------------
 
-  // return (
-  //     <div className="repl-input-div">
-  //     <div contentEditable={!disabled}
-  //         className="repl-input repl-userinput"
-  //         autoComplete="off"
-  //         onKeyUp={onCommandKeyUp}
-  //         dangerouslySetInnerHTML={{__html:currentCommand}}
-  //         spellCheck={false}
-  //         autoCorrect="off"
-  //         autoCapitalize="off"
-  //         style={getCommandStyle()}
-  //     ></div>
-  // </div>
-  // );
-
   return (
     <div
       className="command repl-input"

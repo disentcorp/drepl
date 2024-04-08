@@ -17,6 +17,7 @@
     "prepublish": "rm -rf ./dist && npm run build"
   },
   "dependencies": {
+    "react-ga4": "^2.1.0",
     "react-tippy": "^1.4.0"
   },
   "peerDependencies": {

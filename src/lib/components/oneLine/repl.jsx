@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react";
 import CommandLine from "./commandline.jsx";
 import Console from "./console.jsx";
 import Prompt from "./prompt.jsx";
+import ReactGA from 'react-ga4'
 
 import "../styles/repl.css";
 
@@ -69,6 +70,9 @@ const Repl = (props) => {
             () => controller.abort(),
             REPL_CALL_TIMEOUT,
           );
+          ReactGA.event({		
+          category: 'User',
+          action: 'API Call'})
           try {
             const response = await fetch(url, {
               method: "GET",
@@ -285,6 +289,11 @@ const Repl = (props) => {
   ]);
 
   //--------------USE EFFECT------------------------
+  useEffect(() => {
+    ReactGA.initialize('G-PS2EH759RQ');
+    // Send pageview with a custom path
+    ReactGA.send({ hitType: "pageview", page: "/landingpage", title: "Landing Page" });
+}, [])
   useEffect(() => {
     if (runOnLoad) {
       computeCurrentCommand(defaultInput, currentCallId.current);
