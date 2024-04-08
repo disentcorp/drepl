@@ -23,7 +23,8 @@
     padding-left: 6px;
     padding-right:10px;
     background-color: black;
-    scrollbar-color: white;    
+    scrollbar-color: white;
+    white-space: pre;    
 }
 
 .console{
