@@ -13,6 +13,8 @@
     "build-patch": "yarn version --patch && webpack --config webpack.config.js",
     "start": "react-scripts start",
     "test": "react-scripts test",
+    "link-local": "yarn link && cd node_modules/react && yarn link && cd ../react-dom && yarn link",
+    "unlink-local": "yarn unlink && cd node_modules/react && yarn unlink && cd ../react-dom && yarn unlink",
     "docs": "your-docs-generation-script",
     "prepublish": "rm -rf ./dist && npm run build"
   },
