@@ -73,6 +73,13 @@ const Repl = (props) => {
           ReactGA.event({		
           category: 'User',
           action: 'API Call'})
+          if(currentCommand !==defaultInput){
+            ReactGA.event({		
+              category: 'User',
+              action: 'API Call',
+              label: "Interactive",
+            })
+          }
           try {
             const response = await fetch(url, {
               method: "GET",
