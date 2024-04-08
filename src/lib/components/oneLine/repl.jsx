@@ -291,8 +291,6 @@ const Repl = (props) => {
   //--------------USE EFFECT------------------------
   useEffect(() => {
     ReactGA.initialize('G-PS2EH759RQ');
-    // Send pageview with a custom path
-    ReactGA.send({ hitType: "pageview", page: "/landingpage", title: "Landing Page" });
 }, [])
   useEffect(() => {
     if (runOnLoad) {
