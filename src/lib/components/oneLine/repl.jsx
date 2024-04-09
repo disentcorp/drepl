@@ -11,11 +11,17 @@ const LARGE_SIZE = "850px";
 const MEDIUM_SIZE = "525px";
 const SMALL_SIZE = "400px";
 
+const LARGE_HEIGHT = "425px";
+const MEDIUM_HEIGHT = "225px";
+const SMALL_HEIGHT = "150px";
+
 const MINIMUM_WIDTH = 200;
 const DEFAULT_WIDTH = MEDIUM_SIZE;
 const MINIMUM_INPUT_WIDTH = 45;
 const SINGLE_LINE_HEIGHT = 35;
 const REPL_CALL_TIMEOUT = 5000;
+
+const DEFAULT_INPUT_RATIO = 40
 
 const PROMPT_WIDTHS = {
   python: 34,
@@ -158,6 +164,27 @@ const Repl = (props) => {
     }
   };
 
+  const getWidgetHeight = useCallback((size) => {
+    if (size === "lg" || size === "large" || size === "big") {
+      return LARGE_HEIGHT;
+    } else if (size === "sm" || size === "small" || size === "tiny") {
+      return SMALL_HEIGHT;
+    } else if (size === "md" || size === "medium" || size === "default") {
+      return MEDIUM_HEIGHT;
+    } else if (typeof size === Number) {
+      const minimumSize = Math.max(MINIMUM_HEIGHT, size);
+      return `${minimumSize}px`;
+    } else if (!isNaN(+size)) {
+      const numSize = +size;
+      return `${Math.max(200, numSize)}px`;
+    } else if (typeof size === "string" && size?.endsWith("px")) {
+      const numSize = +size.slice(0, size.length - 2);
+      return isNaN(numSize) ? MEDIUM_HEIGHT : `${Math.max(MINIMUM_HEIGHT, numSize)}px`;
+    } else {
+      return MEDIUM_HEIGHT; //default if improperly formatted
+    }
+  }, []);
+
   const getHeightAsNumber = useCallback(
     (height) => {
       if (typeof height === Number) {
@@ -178,9 +205,27 @@ const Repl = (props) => {
     [DEFAULT_HEIGHT, MINIMUM_HEIGHT],
   );
 
+  const getInputRatioAsNumber = useCallback((ratio)=>{
+    const numRatio = String(ratio).endsWith("%") ? +(String(ratio).slice(0, ratio.length - 1)) : +ratio
+    if (!isNaN(numRatio)) { 
+      if(numRatio<=1 && numRatio >=0){
+        return numRatio*100
+      }
+      else if(numRatio>=1){
+        return numRatio
+      }
+      else{
+        return DEFAULT_INPUT_RATIO
+      }
+    } 
+     else {
+      return DEFAULT_INPUT_RATIO; //default if improperly formatted
+    }
+  },[])
+
   const getHeightInputRatio = useCallback(
     (ratio) => {
-      const numRatio = +ratio;
+      const numRatio = getInputRatioAsNumber(ratio);
       let adjustedRatio =
         numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
       let minInputRatio = SINGLE_LINE_HEIGHT / getHeightAsNumber(height);
@@ -195,7 +240,7 @@ const Repl = (props) => {
 
   const getWidthInputRatio = useCallback(
     (ratio) => {
-      const numRatio = +ratio;
+      const numRatio = getInputRatioAsNumber(ratio);
       let adjustedRatio =
         numRatio > 0 && numRatio < 1 ? numRatio : numRatio / 100;
       if (adjustedRatio > 0.95) {
@@ -321,11 +366,11 @@ const Repl = (props) => {
       ref={replRef}
       style={disabled ? {
         width: getWidgetWidth(width),
-        height: multiLine ? height : MINIMUM_HEIGHT,
+        height: multiLine ? getWidgetHeight(height) : MINIMUM_HEIGHT,
         cursor: 'not-allowed' 
       } : {
         width: getWidgetWidth(width),
-        height: multiLine ? height : MINIMUM_HEIGHT
+        height: multiLine ? getWidgetHeight(height) : MINIMUM_HEIGHT
       }}
     >
       <Prompt
