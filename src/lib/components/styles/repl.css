@@ -1,4 +1,4 @@
-.repl{
+.drepl{
     white-space: nowrap;
     display:flex;
     flex-wrap:wrap;
@@ -10,14 +10,14 @@
     text-align:left;
     box-sizing:border-box
 }
-.prompt{
+.drepl-prompt{
     flex: 0 1 auto;
     cursor:pointer;
     border:0px;
     padding-left:5px;
 }
 
-.command{
+.drepl-command{
     flex: 0 1 auto;
     padding-left: 6px;
     padding-right:10px;
@@ -26,7 +26,7 @@
     white-space: pre;    
 }
 
-.console{
+.drepl-console{
 flex: 1 1 auto;
 border-left:0px;
 padding-left:5px;
@@ -36,7 +36,7 @@ overflow-y: scroll;
 white-space:nowrap; word-wrap:break-word !important;
 }
 
-.repl-input{
+.drepl-input{
     color:white;
     border: 1px solid black;
     padding-top:8px;
@@ -45,7 +45,7 @@ white-space:nowrap; word-wrap:break-word !important;
 
 }
 
-.repl-output{
+.drepl-output{
 border: 1px solid black;
 padding-top:8px;
 min-height: 35px;
@@ -55,31 +55,31 @@ background-color: white;
 }
 
 
-.command::selection{
+.drepl-command::selection{
     background-color: white;
     color:black;
 }
-.command::placeholder{
+.drepl-command::placeholder{
  color:white;
 opacity: 1;   
 }
-.command:focus{
+.drepl-command:focus{
     outline:0px;
 }
 
 
-.console::selection{
+.drepl-console::selection{
     background-color: black;
     color:white;
 }
-.console:focus{
+.drepl-console:focus{
     outline: none;
 }
 
 
 
-.repl-input::-webkit-scrollbar,
-.repl-output::-webkit-scrollbar
+.drepl-input::-webkit-scrollbar,
+.drepl-output::-webkit-scrollbar
 {
     width: 3px;
     height: 3px;
@@ -95,17 +95,17 @@ opacity: 1;
 }
 
 
-.repl::-webkit-scrollbar-thumb{
+.drepl::-webkit-scrollbar-thumb{
     background: black;
 }
 
 
-.repl::-webkit-scrollbar-track {
+.drepl::-webkit-scrollbar-track {
     -webkit-border-radius: 0px;
     border-radius: 0px;
 }
 
-.repl::-webkit-scrollbar-thumb {
+.drepl::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0px;
     border-radius: 0px;
 }

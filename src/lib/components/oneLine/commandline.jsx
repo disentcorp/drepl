@@ -72,7 +72,7 @@ const CommandLine = (props) => {
 
   return (
     <div
-      className="command repl-input"
+      className="drepl-command drepl-input"
       contentEditable={!disabled}
       autoComplete="off"
       onKeyUp={onCommandKeyUp}
