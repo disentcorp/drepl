@@ -35,7 +35,7 @@ const Prompt = forwardRef((props, ref) => {
   //-----------------USEEFFECTS-----------------------
 
   return (
-    <div className="prompt repl-input" ref={ref} style={inlineStyles}>
+    <div className="drepl-prompt drepl-input" ref={ref} style={inlineStyles}>
       <ToolTip imports={imports} innerComponentHTML={toolTipInnerHTML} />
     </div>
   );

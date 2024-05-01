@@ -362,7 +362,7 @@ const Repl = (props) => {
 
   return (
     <div
-      className="repl"
+      className="drepl"
       ref={replRef}
       style={disabled ? {
         width: getWidgetWidth(width),

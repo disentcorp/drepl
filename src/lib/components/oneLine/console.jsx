@@ -49,7 +49,7 @@ const Console = (props) => {
   return (
     <div
       ref={innerHTMLRef}
-      className="console repl-output"
+      className="drepl-console drepl-output"
       style={{ ...inlineStyles }}
       contentEditable={exposeCurrentOutput !== null}
       dangerouslySetInnerHTML={{ __html: currentOutput }}
